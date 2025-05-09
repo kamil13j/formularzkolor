@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista osób</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .person {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="formularz">
+        <label for="imie">Imię:</label>
+        <input type="text" id="imie" name="imie" required><br><br>
+
+        <label for="nazwisko">Nazwisko:</label>
+        <input type="text" id="nazwisko" name="nazwisko" required><br><br>
+
+        <label for="wiek">Czy jesteś pełnoletni?</label>
+        <input type="checkbox" id="wiek" name="wiek"><br><br>
+
+        <label for="kolor">Wybierz kolor:</label>
+        <input type="color" id="kolor" name="kolor"><br><br>
+
+        <button type="button" onclick="addPerson()">Dodaj osobę</button>
+        <button type="button" onclick="resetList()">Resetuj</button>
+    </form>
+
+    <h2>Lista osób:</h2>
+    <div id="personList"></div>
+
+    <script>
+        function addPerson() {
+            let firstName = document.getElementById("imie").value;
+            let lastName = document.getElementById("nazwisko").value;
+            let isAdult = document.getElementById("wiek").checked ? "Pełnoletni" : "Niepełnoletni";
+            let color = document.getElementById("kolor").value;
+
+            let personDiv = document.createElement("div");
+            personDiv.className = "person";
+            personDiv.innerHTML = `${firstName} ${lastName} - ${isAdult}`;
+            personDiv.style.color = color;
+
+            personDiv.onclick = function() {
+                this.style.backgroundColor = document.getElementById("kolor").value;
+            };
+
+            document.getElementById("personList").appendChild(personDiv);
+        }
+
+        function resetList() {
+            document.getElementById("personList").innerHTML = ""; 
+            document.getElementById("formularz").reset(); 
+        }
+    </script>
+
+</body>
+</html>
